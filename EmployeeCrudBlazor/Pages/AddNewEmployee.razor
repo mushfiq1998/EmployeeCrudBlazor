@@ -1,0 +1,73 @@
+﻿@page "/AddNewEmployee"
+@using EmployeeCrudBlazor.Data
+@inject EmployeeService employeeService
+@inject NavigationManager NavigationManager
+
+<h3>Add New Employee</h3>
+<hr />
+
+<form>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="for-group">
+				<label for="@nameof(obj.FirstName)" class="control-label">First Name</label>
+				<input for="FirstName" class="form-control" @bind="@obj.FirstName" />
+			</div>
+			<div class="for-group">
+				<label for="@nameof(obj.MiddleName)" class="control-label">Middle Name</label>
+				<input for="MiddleName" class="form-control" @bind="@obj.MiddleName" />
+			</div>
+			<div class="for-group">
+				<label for="@nameof(obj.LastName)" class="control-label">last Name</label>
+				<input for="LastName" class="form-control" @bind="@obj.LastName" />
+			</div>
+			<div class="for-group">
+				<label for="@nameof(obj.EmailAddress)" class="control-label">Email Address</label>
+				<input for="EmailAddress" class="form-control" @bind="@obj.EmailAddress" />
+			</div>
+			<div class="for-group">
+				<label for="@nameof(obj.PhoneNumber)" class="control-label">Phone Number</label>
+				<input for="PhoneNumber" class="form-control" @bind="@obj.PhoneNumber" />
+			</div>
+			<div class="for-group">
+				<label for="@nameof(obj.PostalCode)" class="control-label">PostalCode</label>
+				<input for="PostalCode" class="form-control" @bind="@obj.PostalCode" />
+			</div>
+			<div class="for-group">
+				<label for="@nameof(obj.Address)" class="control-label">Address</label>
+				<input for="Address" class="form-control" @bind="@obj.Address" />
+			</div>
+			<div class="for-group">
+				<label for="@nameof(obj.City)" class="control-label">City</label>
+				<input for="City" class="form-control" @bind="@obj.City" />
+			</div>
+			<div class="for-group">
+				<label for="@nameof(obj.Designation)" class="control-label">Designation</label>
+				<input for="Designation" class="form-control" @bind="@obj.Designation" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group">
+				<input type="button" class="btn btn-primary" @onclick="@CreateNewEmployee" value="Save" />
+				<input type="button" class="btn btn-danger" @onclick="@Cancel" value="Cancel" />
+			</div>
+		</div>
+	</div>
+</form>
+
+@code {
+	Employee obj = new Employee();
+
+	protected async Task CreateNewEmployee()
+	{
+		await employeeService.AddNewEmployee(obj);
+		NavigationManager.NavigateTo("Employees");
+	}
+
+	protected async Task Cancel()
+	{
+		NavigationManager.NavigateTo("Employees");
+	}
+}
